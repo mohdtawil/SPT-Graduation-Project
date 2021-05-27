@@ -1,0 +1,82 @@
+<%- include("../../patials/header/firstHeader.ejs") %>
+<title>SPT | Show Unit</title>
+<%- include("../../patials/header/styleHeader.ejs") %>
+<%- include("../../patials/header/endHeader.ejs") %>
+<%- include("../../patials/header/navHeader.ejs") %>
+<br><br>
+<section id="Title">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-3">
+                <div class="row justify-content-center">
+                    <div class="col-md-9  text-center">
+                        <p class="title"><%= singleUnit.name %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<%= allTopics.length %>
+<section id="AddToList">
+    <div class="container">
+        <div class="row m-0 justify-content-center">
+            <div class="col-lg-9 col-md-10 col-12">
+                <h5 class="addtolistLabel">Please.. Add Topic To <%= singleUnit.name %></h5>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Topics List
+                    </a>
+                    <% if(!allTopics.length == 0 ) { %>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <% allTopics.forEach(function(topic) { %>
+                                <li><a class="dropdown-item" href="/add/unit/<%= singleUnit._id %>/topic/<%= topic._id %>"> <%= topic.name %></a></li>
+                            <% }) %>
+                        </ul>
+                    <% } else { %>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li class="dropdown-item">Topics list is empty</li>
+                        </ul>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="View">
+    <div class="container">
+        <div class="row m-0">
+            <div class="col-12 my-3">
+                <hr>
+            </div>
+            <div class="col-12">
+                <div class="row justify-content-center">
+                <% if(! singleUnit.TopicListID.length == 0 ) { %>
+                    <% singleUnit.TopicListID.forEach(function(topic) { %>
+                        <div class="col-lg-4 col-md-6 col-12  mt-2">
+                            <div class="viewContainer px-3 py-2 pb-3 text-center">
+                                <p class="viewLabel mb-4" style="font-size: 1.3em"> Topic: <%= topic.name %></p>
+                                <a href="/view/topic/<%= topic._id %>" class="viewButton py-2 px-3">View Topic</a>
+                                <div class=" d-flex justify-content-end">
+                                    <a href="/delete/unit/<%= singleUnit._id %>/topic/<%= topic._id %>" class="" style="color: #FFF"><i class="fa fa-trash"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <div class="col-md-6 col-12">
+                        <div class="viewContainer p-2 text-center">
+                            <p class="viewLabel " >The Unit <%= singleUnit.name %> Doesn't Have Any Topic.</p>
+                        </div>
+                    </div>
+                <% } %>
+                </div>
+            </div>
+            <div class="col-12 my-3">
+                <hr>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include("../../patials/footer/endFooter.ejs") %>

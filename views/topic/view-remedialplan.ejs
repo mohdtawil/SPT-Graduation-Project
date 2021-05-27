@@ -1,0 +1,142 @@
+<%- include("../../patials/header/firstHeader.ejs") %>
+<title>SPT | Insert Semesterplan</title>
+<%- include("../../patials/header/styleHeader.ejs") %>
+<%- include("../../patials/header/endHeader.ejs") %>
+<%- include("../../patials/header/navHeader.ejs") %>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+    #View {
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+    #View .viewContainer {
+        background-color: #327FAD;
+        border-radius: 15px;
+    }
+    #View .viewLabel {
+        color: #BEE1F5;
+        display: block;
+        font-size: 1.8em;
+        font-weight: 500;
+        margin-bottom: 0.5em;
+    }
+    .deleteButton {
+        background-color: #ec6767;
+        color: #FFF;
+        padding: 0.3em 0.8em;
+        font-size: 0.9em;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+    }
+    #View .viewLabelCustom {
+        color: #fff;
+        display: block;
+        font-size: 1.1em;
+        font-weight: 200;
+        margin-bottom: 0;
+    }
+    #View .viewButton {
+        padding: 15px;
+        border-radius: 15px;
+        background-color: #3958be;
+        color: #fff;
+        font-weight: 500;
+        text-decoration: none;
+        font-size: 0.9em;
+    }
+    #View .viewButton:hover {
+        text-decoration: none;
+        background-color: #2f52c4;
+        color: #fff;
+    }
+</style>
+    <section id="User">
+        <div class="conatiner">
+            <div class="row m-0 justify-content-end">
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-7 px-xl-4 px-lg-3 px-md-2 mt-md-1 mt-2">
+                    <a href="/view/topic/<%= singleTopic._id %>" >
+                        <div class="user p-1">
+                            <div class="userContainer">
+                                <div class="img">
+                                    <i class="material-icons" style="font-size:36px">cancel</i>
+                                </div>
+                                <div class="text">
+                                    <p class="userName d-inline">Back To Topic</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+    <section id="Title">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-7 col-sm-8 col-9 text-center">
+                            <p class="title">Show All Remedials Plan For <%= singleTopic.name %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="View">
+        <div class="container">
+            <div class="row justify-content-center">
+                <% var count = 0; %>
+                <% if(!(allRemedials.length == 0)) { %>
+                    <% allRemedials.forEach(function(remedial) { %>
+                        <div class="col-9 p-1 ">
+                            <div class="box p-2 viewContainer">
+                                <div class="row">
+                                    <div class="col-12 ">
+                                        <p class="viewLabel">Remedial <%= ++count %></p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="viewLabelCustom"><span class="fw-bold">Course Name:</span> <%= remedial.CourseName %></p>
+                                        <p class="viewLabelCustom"><span class="fw-bold">Topic:</span> <%= remedial.TopicName %></p>
+                                        <p class="viewLabelCustom">
+                                            <span class="fw-bold">Procedular List:</span> 
+                                            <br>
+                                            <% var PLcount= 0; %>
+                                            <% remedial.ProcedularList.forEach(function(PL) { %>
+                                                <p class="text-light"><%= ++PLcount %>: <%= PL %></p>
+                                            <% }) %>
+                                        </p>
+                                        <p class="viewLabelCustom">
+                                            <span class="fw-bold">Note List:</span> 
+                                            <br>
+                                            <% var NLcount= 0; %>
+                                            <% remedial.NoteList.forEach(function(NL) { %>
+                                                <p class="text-light"><%= ++NLcount %>: <%= NL %></p>
+                                            <% }) %>
+                                        </p>
+                                        <p class="viewLabelCustom"><span class="fw-bold">Start Date:</span> <%= remedial.StartDate %></p>
+                                        <p class="viewLabelCustom"><span class="fw-bold">End Date:</span> <%= remedial.EndDate %></p>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <form action="/delete/topic/<%= singleTopic._id %>/remedialplan/<%= remedial._id %>?_method=DELETE" method="POST">
+                                            <button class="deleteButton" type="submit" style="margin-bottom: -1.2em;">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <div class="row">
+                        <div class="col-12 text-center mt-5 ">
+                            <h3 class="h3 text-light">(<%= singleTopic.name %>) Doesn't have any remedial plan yet</h3>
+                        </div>
+                    </div>
+                <% } %>
+               
+            </div>
+        </div>
+    </section>
+

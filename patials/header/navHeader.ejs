@@ -1,0 +1,160 @@
+<link href='https://fonts.googleapis.com/css?family=Anaheim' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Courier Prime' rel='stylesheet'>
+
+   <section id="Navbar">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <div class="container-fluid  py-2">
+              <a class="navbar-brand"  style="font-family:'Courier Prime'"href="/">S P T</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav  w-100" style=" font-family:'Courier Prime' ">
+                <% if(currentUser) { %>
+                    <% if(currentUser.isAdmin) { %>
+                        <a class="nav-link fw-bold text-success"  href="/admin/dashboard" >Dashboard</a>
+                        <a class="nav-link"  href="/view/semesters">Semesters</a>
+                        <a class="nav-link"  href="/view/classes">Classes</a>
+                        <a class="nav-link"  href="/view/students">Students</a>
+                        <a class="nav-link"  href="/view/teachers">Teachers</a>
+                        
+                    <% } %>
+                <% } %>
+                <% if(currentUser) { %>
+                    <% if(!currentUser.isAdmin) { %>
+                        <% if(currentUser.role == "Teacher") { %>
+                            <a class="nav-link"  href="/view/teacher/<%= currentUser.teacherID.id._id %>">Dashboard</a>
+                            <a class="nav-link"  href="/view/courses">Courses</a>
+                            <a class="nav-link"  href="/view/units">Units</a>
+                            <a class="nav-link"  href="/view/topics" >Topics</a>
+                        <% } else if(currentUser.role == "Student") {%>
+                            <a class="nav-link"  href="/view/student/<%= currentUser.studentID.id._id %>">Dashboard</a>
+                        <% } %>
+                    <% } %>
+                <% } %>
+                  
+                <div class="auth d-flex ml-auto px-4 w-100 justify-content-end ">
+                    
+                    <% if(currentUser) { %>
+                        <a class="nav-link fw-bold"  href="/logout" style="font-family:'Courier Prime'">Logout</a>
+                    <% } else { %>
+                        <a class="nav-link fw-bold"  href="/login" style="font-family:'Courier Prime';">Login</a>
+                        <a class="nav-link fw-bold"  href="/register" style="font-family:'Courier Prime';">Register</a>    
+                    <% } %>
+                </div>
+                </div>
+              </div>
+            </div>
+        </nav>
+    </section>
+    <% if(currentUser) { %>
+        <% if(currentUser.isAdmin) { %>
+            <section id="User">
+                <div class="conatiner">
+                    <div class="row m-0 justify-content-end">
+                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-7 px-xl-4 px-lg-3 px-md-2 mt-md-1 mt-2">
+                            <div class="user p-1">
+                                <div class="userContainer">
+                                    <div class="img">
+                                        <img src="https://yinnepal.files.wordpress.com/2017/11/admin.png?w=640" class="userImage" alt="">
+                                    </div>
+                                    <div class="text">
+                                        <p class="userName d-inline"> Welcome,  <%= currentUser.username %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <% } else { %>
+            <style>
+                .ll {
+                    text-decoration: none;
+                }
+            </style>
+            <% if(currentUser.role == "Student") { %>
+                <a class="ll" href="/view/student/<%= currentUser.studentID.id._id %>">
+                    <section id="User">
+                        <div class="conatiner">
+                            <div class="row m-0 justify-content-end">
+                                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-7 px-xl-4 px-lg-3 px-md-2 mt-md-1 mt-2">
+                                    <div class="user p-1">
+                                        <div class="userContainer">
+                                            <div class="img">
+                                                <img src="https://p7.hiclipart.com/preview/162/211/792/avatar-computer-icons-business-business-woman.jpg" class="userImage" alt="">
+                                            </div>
+                                            <div class="text">
+                                                <p class="userName d-inline"> Welcome, <%= currentUser.role %> <%= currentUser.studentID.id.name %></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </a>
+                <% } else if(currentUser.role == "Teacher") {  %>
+                    <a class="ll" href="/view/teacher/<%= currentUser.teacherID.id._id %>">
+                        <section id="User">
+                            <div class="conatiner">
+                                <div class="row m-0 justify-content-end">
+                                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-7 px-xl-4 px-lg-3 px-md-2 mt-md-1 mt-2">
+                                        <div class="user p-1">
+                                            <div class="userContainer">
+                                                <div class="img">
+                                                    <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/girl_avatar_child_kid-512.png" class="userImage" alt="">
+                                                </div>
+                                                <div class="text">
+                                                    <p class="userName d-inline"> Welcome, <%= currentUser.role %> <%= currentUser.teacherID.id.name %></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </a>
+                    <% } else if(currentUser.role == "Parent") {  %>
+                        <a class="ll" href="/view/parent/<%= currentUser.parentID.id._id %>">
+                            <section id="User">
+                                <div class="conatiner">
+                                    <div class="row m-0 justify-content-end">
+                                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-7 px-xl-4 px-lg-3 px-md-2 mt-md-1 mt-2">
+                                            <div class="user p-1">
+                                                <div class="userContainer">
+                                                    <div class="img">
+                                                        <img src="https://cdn3.iconfinder.com/data/icons/banking-finance-i-flat-multicolor-background-shado/2048/About-512.png" class="userImage" alt="">
+                                                    </div>
+                                                    <div class="text">
+                                                        <p class="userName d-inline"> Welcome, <%= currentUser.role %> <%= currentUser.parentID.id.name %></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </a>
+                    <% } %>
+        <% } %>
+    
+    <% } %>
+    <section>
+       <div class="container">
+           <div class="row">
+               <div class="col-12">
+                   <% if(error && error.length > 0) { %>
+                        <div class="alert alert-danger m-4" style="background-color: rgb(236, 152, 138, 0.836); border-color: rgb(236, 152, 138, 0.836);" role="alert">
+                            <%= error %>
+                        </div>
+                   <% } %>
+                   <% if(success && success.length > 0) { %>
+                        <div class="alert alert-success m-4" style="background-color: rgba(58, 206, 90, 0.836); border-color: rgb(58, 206, 90, 0.836);" role="alert">
+                            <%= success %>
+                        </div>
+                   <% } %>
+               </div>
+           </div>
+       </div>
+    </section>

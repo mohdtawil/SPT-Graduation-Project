@@ -1,0 +1,68 @@
+<%- include("../../patials/header/firstHeader.ejs") %>
+<title>SPT | Insert TODO</title>
+<%- include("../../patials/header/styleHeader.ejs") %>
+<%- include("../../patials/header/endHeader.ejs") %>
+<%- include("../../patials/header/navHeader.ejs") %>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <section id="User">
+        <div class="conatiner">
+            <div class="row m-0 justify-content-end">
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-7 px-xl-4 px-lg-3 px-md-2 mt-md-1 mt-2">
+                    <a href="/view/course/<%= singleCourse._id %>" >
+                        <div class="user p-1">
+                            <div class="userContainer">
+                                <div class="img">
+                                    <i class="material-icons" style="font-size:36px">cancel</i>                                </div>
+                                <div class="text">
+                                    <p class="userName d-inline"> Back To <%= singleCourse.name %> Course</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+<br><br>
+    <section id="Title">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-7 col-sm-8 col-9 text-center">
+                            <p class="title">Insert New TODO</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Form">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-7 col-11 mt-5">
+                    <div class="formContainer p-4 pb-2">
+                        <form action="/insert/course/<%= singleCourse._id %>/todo" method="POST">
+                            <label for="" class="formLabel">TODO Title</label>
+                            <input type="text" name="form_todoTitle" placeholder=""   class="formInput mb-2">
+                            <label for="" class="formLabel">TODO Description</label>
+                            <textarea type="text" name="form_todoDescription" placeholder="Please.. Enter '+' operator to new line"   rows="4"  class="formInput mb-2"></textarea>
+                            <label for="" class="formLabel">Course Name</label>
+                            <input type="text" name="form_courseName" placeholder="" value="<%= singleCourse.name %>" readonly class="formInput mb-2">
+                            <label for="" class="formLabel">Due Date</label>
+                            <input type="date" name="form_DueDate" placeholder=""   class="formInput mb-2">
+                            
+                            <button class="formButton" style="margin-top: 1em;">insert</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<br>
+
+
+<%- include("../../patials/footer/endFooter.ejs") %>

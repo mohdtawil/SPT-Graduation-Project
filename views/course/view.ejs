@@ -1,0 +1,82 @@
+<%- include("../../patials/header/firstHeader.ejs") %>
+<title>SPT | All Courses</title>
+<%- include("../../patials/header/styleHeader.ejs") %>
+<%- include("../../patials/header/endHeader.ejs") %>
+<%- include("../../patials/header/navHeader.ejs") %>
+    <section id="User">
+        <div class="conatiner">
+            <div class="row m-0 justify-content-end">
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-7 px-xl-4 px-lg-3 px-md-2 mt-md-1 mt-2">
+                    <a href="/insert/course" >
+                        <div class="user p-1 d-flex justify-content-start align-items-center">
+                            <div class="userContainer">
+                                <div class="img">
+                                    <i class="material-icons" style="font-size:39px; color: #fff;">add_circle_outline</i>                                </div>
+                                </div>
+                                <div class="text">
+                                    <p class="userName d-inline"> Insert New Course</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Title">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-7 col-sm-8 col-9 text-center">
+                            <p class="title">All Courses</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="View">
+        <div class="container">
+            <div class="row m-0">
+                <div class="col-12 mt-3">
+                    <div class="row justify-content-center">
+                        <% var studentCounter = 0;%>
+                        <% if(! allCourses.length == 0 ) { %>
+                            <% allCourses.forEach(function(course) { %>
+                                <div class="col-lg-4 col-md-6 col-12  mt-2">
+                                    <div class="viewContainer p-4 pt-3 pl-2 pb-2 ">
+                                        <p class="viewLabel mb-4 text-center" style="font-size: 1.2em"><%= course.name %> </p>
+                                        <div class="text-center">
+                                            <a href="/view/course/<%= course._id %>" class="viewButton">View Details</a>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6 mt-4">
+                                                <span style="color: #f3f3f3; font-size: 0.9em;">by <%= course.authorName %></span>
+                                            </div>
+                                            <div class="col-6 d-flex mt-4 justify-content-end">
+                                                <a href="/edit/course/<%= course._id %>" title="Edit" class="viewIcon"><i class="far fa-edit"></i></a>
+                                                <form class="mb-0" action="/delete/course/<%= course._id %>?_method=DELETE" method="POST">
+                                                    <button type="submit" title="Delete" class="viewIcon"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            <% }); %>
+                        <% } else { %>
+                        <div class="col-lg-5 col-md-6 col-12  mt-2">
+                            <div class="viewContainer p-2 text-center">
+                                <p class="viewLabel " >Not Found Any Course</a></p>
+                            </div>
+                        </div>
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<%- include("../../patials/footer/endFooter.ejs") %>

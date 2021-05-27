@@ -1,0 +1,76 @@
+<%- include("../../patials/header/firstHeader.ejs") %>
+<title>SPT | View Semester</title>
+<%- include("../../patials/header/styleHeader.ejs") %>
+<%- include("../../patials/header/endHeader.ejs") %>
+<%- include("../../patials/header/navHeader.ejs") %>
+<br><br>
+    <section id="Title">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="row justify-content-center">
+                        <div class="col-md-9  text-center">
+                            <p class="title"><%= singleSemester.name %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="AddToList">
+        <div class="container">
+            <div class="row m-0 justify-content-center">
+                <div class="col-lg-9 col-md-10 col-12">
+                    
+                    <h5 class="addtolistLabel">Please.. Add Class To  <%= singleSemester.name %> </h5>
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            Classes List
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <% if(! allClasses.length == 0) { %>
+                                <% allClasses.forEach(function(Class) { %>
+                                    <li><a class="dropdown-item" href="/add/semester/<%= singleSemester._id %>/class/<%= Class._id %>"> <%= Class.name %></a></li>
+                                <% }); %>
+                            <% } else { %>
+                                    <li class="dropdown-item">Class list is empty</li>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="View">
+        <div class="container">
+            <div class="row m-0">
+                <div class="col-12 mt-5">
+                    <div class="row justify-content-center">
+                    <% if(! singleSemester.classesListID.length == 0 ) { %>
+                        <% singleSemester.classesListID.forEach(function(Class) { %>
+                            <div class="col-lg-4 col-md-6 col-12  mt-3">
+                                <div class="viewContainer px-3 py-2 pb-3 text-center">
+                                    <p class="viewLabel mb-4" style="font-size: 1.3em"> Class: <%= Class.name %></p>
+                                    <a href="/view/class/<%= Class._id %>" class="viewButton py-2 px-3">View Class</a>
+                                    <div class=" d-flex justify-content-end">
+                                        <a href="/delete/semester/<%= singleSemester._id %>/class/<%= Class._id %>" class="" style="color: #FFF"><i class="fa fa-trash"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="col-lg-5 col-md-6 col-12  mt-2">
+                            <div class="viewContainer p-2 text-center">
+                                <p class="viewLabel " >The Semester <%= singleSemester.name %> Doesn't Have Any Class.</p>
+                            </div>
+                        </div>
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<%- include("../../patials/footer/endFooter.ejs") %>

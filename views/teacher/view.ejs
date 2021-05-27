@@ -1,0 +1,89 @@
+<%- include("../../patials/header/firstHeader.ejs") %>
+<title>SPT | All Teachers</title>
+<%- include("../../patials/header/styleHeader.ejs") %>
+<%- include("../../patials/header/endHeader.ejs") %>
+<%- include("../../patials/header/navHeader.ejs") %>
+    <section id="User">
+        <div class="conatiner">
+            <div class="row m-0 justify-content-end">
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-7 px-xl-4 px-lg-3 px-md-2 mt-md-1 mt-2">
+                    <a href="/insert/teacher" >
+                        <div class="user p-1  d-flex justify-content-start align-items-center">
+                            <div class="userContainer" >
+                                <div class="img">
+                                    <i class="material-icons" style="font-size:39px; color: #fff">add_circle_outline</i>                                </div>
+                                </div>
+                                <div class="text">
+                                    <p class="userName d-inline"> Insert New Teacher</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Title">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-7 col-sm-8 col-9 text-center">
+                            <p class="title">All Teachers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="View">
+        <div class="container">
+            <div class="row m-0">
+                <div class="col-12 mt-3">
+                    <div class="row justify-content-center">
+                        <% var teacherCounter = 0;%>
+                        <% if(! allTeachers.length == 0 ) { %>
+                            <% allTeachers.forEach(function(teacher) { %>
+                                <div class="col-lg-4 col-md-6 col-12  mt-3">
+                                    <div class="viewContainer p-4 pl-2 pb-2 ">
+                                        <p class="viewLabel mb-1 text-left"># <%= ++teacherCounter %></p>
+                                        <p class="viewLabel mb-1 text-left">Name: <%= teacher.name %> </p>
+                                        <p class="viewLabel mb-1">SSN: <%= teacher.ssn %> </p>
+                                        <p class="viewLabel mb-1">Ministerial: <%= teacher.ministerialNum %> </p>
+                                        <% if(teacher.RealTeacher) { %>
+                                            <p class="viewLabel mb-5">Real: Yes </p>
+                                        <% } else { %>
+                                            <p class="viewLabel mb-5">Real: No </p>
+                                        <% } %>
+                                        <div class="text-center">
+                                            <a href="/view/teacher/<%= teacher._id %>" class="viewButton">View Details</a>
+                                        </div>
+                                        <div class=" d-flex mt-4 justify-content-end">
+                                            <% if(teacher.RealTeacher) { %>
+                                                <a href="/change/teacher/<%= teacher._id %>" class="viewIcon" style="font-weight: 500; margin-right: 1em">Change Real To NO</a>
+                                            <% } else { %>
+                                                <a href="/change/teacher/<%= teacher._id %>" class="viewIcon" style="font-weight: 500; margin-right: 1em">Change Real To YES</a>
+                                            <% } %>
+                                            <a href="/edit/teacher/<%= teacher._id %>" title="Edit" class="viewIcon"><i class="far fa-edit"></i></a>
+                                            <form class="mb-0" action="/delete/teacher/<%= teacher._id %>?_method=DELETE" method="POST">
+                                                <button type="submit" title="Delete" class="viewIcon"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        <% } else { %>
+                        <div class="col-lg-5 col-md-6 col-12  mt-2">
+                            <div class="viewContainer p-2 text-center">
+                                <p class="viewLabel " >Not Found Any Teacher</a></p>
+                            </div>
+                        </div>
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<%- include("../../patials/footer/endFooter.ejs") %>

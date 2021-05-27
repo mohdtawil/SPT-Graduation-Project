@@ -1,0 +1,239 @@
+<%- include("../../patials/header/firstHeader.ejs") %>
+<title>SPT | View Course</title>
+<%- include("../../patials/header/styleHeader.ejs") %>
+<%- include("../../patials/header/endHeader.ejs") %>
+<%- include("../../patials/header/navHeader.ejs") %>
+    <section id="User">
+        <div class="conatiner">
+            <div class="row m-0 justify-content-end">
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-7 px-xl-4 px-lg-3 px-md-2 mt-md-1 mt-2">
+                    <a href="/insert/course/<%= singleCourse._id %>/semesterplan" >
+                        <div class="user p-1 d-flex justify-content-start align-items-center">
+                            <div class="userContainer">
+                                <div class="img m-0">
+                                    <i class="material-icons" style="font-size:39px; color: #fff;">add_circle_outline</i>                                </div>
+                                </div>
+                                <div class="text">
+                                    <p class="userName d-inline"> Insert New Semester Plan</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="User">
+        <div class="conatiner">
+            <div class="row m-0 justify-content-end">
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-7 px-xl-4 px-lg-3 px-md-2 mt-md-1 mt-2">
+                    <a href="/insert/course/<%= singleCourse._id %>/todo" >
+                        <div class="user p-1 d-flex justify-content-start align-items-center">
+                            <div class="userContainer">
+                                <div class="img m-0">
+                                    <i class="material-icons" style="font-size:39px; color: #fff;">add_circle_outline</i>                                </div>
+                                </div>
+                                <div class="text">
+                                    <p class="userName d-inline"> Add New TODO</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="User">
+        <div class="conatiner">
+            <div class="row m-0 justify-content-end">
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-7 px-xl-4 px-lg-3 px-md-2 mt-md-1 mt-2">
+                    <a href="/view/course/<%= singleCourse._id %>/students" >
+                        <div class="user p-1 d-flex justify-content-start align-items-center">
+                            <div class="userContainer">
+                                <div class="img m-0">
+                                    <i class="material-icons" style="font-size:39px; color: #fff;">add_circle_outline</i>                                </div>
+                                </div>
+                                <div class="text">
+                                    <p class="userName d-inline">Make Attendence</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br><br>
+    <section id="Title">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="row justify-content-center">
+                        <div class="col-md-9  text-center">
+                            <p class="title"><%= singleCourse.name %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="AddToList">
+        <div class="container">
+            <div class="row m-0 justify-content-center">
+                <div class="col-lg-9 col-md-10 col-12">
+                    <% if(currentUser) { %>
+                        <% if(currentUser.isAdmin) { %>
+                           
+                            
+                      
+                    <h5 class="addtolistLabel">Please.. Add Teacher To <%= singleCourse.name %></h5>
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            Teachers List
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <% if(! allTeachers.length == 0) { %>
+                            <% allTeachers.forEach(function(Teacher) { %>
+                                <li><a class="dropdown-item" href="/add/course/<%= singleCourse._id %>/teacher/<%= Teacher._id %>"><%= Teacher.name %> - <%= Teacher.ssn %></a></li>
+                            <% }); %>
+                        <% } else { %>
+                                <li class="dropdown-item">Teacher list is empty</li>
+                        <% } %>
+                        </ul>
+                    </div>
+                    <br>
+                    <% } %>
+                    <% } %>
+                    <h5 class="addtolistLabel">Please.. Add Unit To <%= singleCourse.name %></h5>
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            Units List
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <% if(! allUnits.length == 0) { %>
+                            <% allUnits.forEach(function(Unit) { %>
+                                <li><a class="dropdown-item" href="/add/course/<%= singleCourse._id %>/unit/<%= Unit._id %>"><%= Unit.name %></a></li>
+                            <% }); %>
+                        <% } else { %>
+                                <li class="dropdown-item">Unit list is empty</li>
+                        <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="View">
+        <div class="container">
+            <div class="row m-0">
+                <div class="col-12 my-3">
+                    <hr>
+                 </div>
+                <div class="col-12">
+                    <div class="row justify-content-center">
+                    <% if(!singleCourse.SemesterPlan.length == 0) {  %>
+                        <% singleCourse.SemesterPlan.forEach(function(Plan) { %>
+                            <div class="col-lg-4 col-md-6 col-12  mt-2">
+                                <div class="viewContainer p-4 pb-2 text-center">
+                                    <p class="viewLabel mb-5 text-center" style="font-size: 1.2em">Semester Plan </p>
+                                    <a href="/view/course/<%= singleCourse._id %>/semesterplan/<%= Plan._id %>" class="viewButton">View Plan</a>
+                                    <div class=" d-flex mt-4 justify-content-end">
+                                        <a href="/edit/course/<%= singleCourse._id %>/semesterplan" title="Edit" class="viewIcon"><i class="far fa-edit"></i></a>
+                                        <form class="mb-0" action="/delete/course/<%= singleCourse._id %>/semesterplan/<%= Plan._id %>?_method=DELETE" method="POST">
+                                            <button type="submit" title="Delete" class="viewIcon"><i class="fa fa-trash"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="col-md-6 col-12">
+                            <div class="viewContainer p-2 text-center">
+                                <p class="viewLabel " >The Course <%= singleCourse.name %> Doesn't Have Semester Plan.</p>
+                            </div>
+                        </div>
+                    <% } %>
+                    </div>
+                </div>
+                <div class="col-12 my-3">
+                    <hr>
+                </div>
+                <div class="col-12">
+                    <div class="row justify-content-center">
+                    <% if(! singleCourse.StudentList.length == 0 ) { %>
+                        <% singleCourse.StudentList.forEach(function(Student) { %>
+                            <div class="col-lg-4 col-md-6 col-12  mt-2">
+                                <div class="viewContainer px-3 py-2 pb-3 text-center">
+                                    <p class="viewLabel mb-4" style="font-size: 1.3em"> Student: <%= Student.name %></p>
+                                    <a href="/view/student/<%= Student._id %>" class="viewButton py-2 px-3">View Student</a>
+                                    
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="col-md-6 col-12">
+                            <div class="viewContainer p-2 text-center">
+                                <p class="viewLabel " >The Course <%= singleCourse.name %> Doesn't Have Any Student.</p>
+                            </div>
+                        </div>
+                    <% } %>
+                    </div>
+                </div>
+                 <div class="col-12 my-3">
+                    <hr>
+                </div>
+                <div class="col-12">
+                    <div class="row justify-content-center">
+                    <% if(! singleCourse.Teacher.length == 0 ) { %>
+                        <% singleCourse.Teacher.forEach(function(Teacher) { %>
+                            <div class="col-lg-4 col-md-6 col-12  mt-3">
+                                <div class="viewContainer px-3 py-2 pb-3 text-center">
+                                    <p class="viewLabel mb-4" style="font-size: 1.3em"> Teacher: <%= Teacher.name %></p>
+                                    <a href="/view/teacher/<%= Teacher._id %>" class="viewButton py-2 px-3">View Teacher</a>
+                                    <div class=" d-flex justify-content-end">
+                                        <a href="/delete/course/<%= singleCourse._id %>/teacher/<%= Teacher._id %>" class="" style="color: #FFF"><i class="fa fa-trash"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="col-md-6 col-12">
+                            <div class="viewContainer p-2 text-center">
+                                <p class="viewLabel " >The Course <%= singleCourse.name %> Doesn't Have Teacher.</p>
+                            </div>
+                        </div>
+                    <% } %>
+                    </div>
+                </div>
+                <div class="col-12 my-3">
+                    <hr>
+                </div>
+                <div class="col-12">
+                    <div class="row justify-content-center">
+                    <% if(! singleCourse.UnitListID.length == 0 ) { %>
+                        <% singleCourse.UnitListID.forEach(function(Unit) { %>
+                            <div class="col-lg-4 col-md-6 col-12  mt-2">
+                                <div class="viewContainer px-3 py-2 pb-3 text-center">
+                                    <p class="viewLabel mb-4" style="font-size: 1.3em"> Unit: <%= Unit.name %></p>
+                                    <a href="/view/unit/<%= Unit._id %>" class="viewButton py-2 px-3">View Unit</a>
+                                    <div class=" d-flex justify-content-end">
+                                        <a href="/delete/course/<%= singleCourse._id %>/unit/<%= Unit._id %>" class="" style="color: #FFF"><i class="fa fa-trash"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="col-md-6 col-12">
+                            <div class="viewContainer p-2 text-center">
+                                <p class="viewLabel " >The Course <%= singleCourse.name %> Doesn't Have Any Unit.</p>
+                            </div>
+                        </div>
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<%- include("../../patials/footer/endFooter.ejs") %>

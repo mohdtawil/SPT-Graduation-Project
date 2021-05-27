@@ -1,0 +1,289 @@
+<%- include("../../patials/header/firstHeader.ejs") %>
+<title>SPT | Admin Dashboard</title>
+<%- include("../../patials/header/styleHeader.ejs") %>
+<%- include("../../patials/header/endHeader.ejs") %>
+<%- include("../../patials/header/navHeader.ejs") %>
+<style>
+    .sec {
+        background-color: rgba(0, 119, 199, 0.411);
+        border-radius:20px;
+    }
+    
+    .semester {
+        position: absolute;
+        max-height: 250px;
+        overflow: auto;
+        left: 10px;
+        top: 150px;
+        width: 350px;
+          
+    }
+    .classroom {
+        position: absolute;
+        max-height: 250px;
+        overflow: auto;
+        left: 385px;
+        top: 150px;
+        width: 350px;
+        
+    }
+    .courses {
+        position: absolute;
+        max-height: 250px;
+        overflow: auto;
+        left: 770px;
+        top: 150px;
+        width: 350px;
+        
+    }
+    .units {
+        position: absolute;
+        max-height: 250px;
+        overflow: auto;
+        left: 1150px;
+        top: 150px; 
+        width: 350px;  
+    }
+    .topics {
+        position: absolute;
+        max-height: 250px;
+        overflow: auto;
+        left: 10px;
+        top: 450px; 
+        width: 350px;
+    }
+    .students {
+        position: absolute;
+        max-height: 250px;
+        overflow: auto;
+        left: 385px;
+        top: 450px;
+        width: 350px; 
+    }
+    .teachers {
+        position: absolute;
+        max-height: 250px;
+        overflow: auto;
+        left: 770px;
+        top: 450px; 
+        width: 350px; 
+    }
+    .parents {
+        position: absolute;
+        max-height: 250px;
+        overflow: auto;
+        left: 1150px;
+        top: 450px;  
+        width: 350px;
+    }
+    .btn-success {
+        font-size: 1.1em;
+        background-color: unset;
+        width: 70%;
+
+    }
+    .btn-success:hover {
+        
+        background-color: #212529;
+        width: 70%;
+    }
+
+</style>
+<div class="semester">
+    <div class="sec">
+        <div class="row m-0">
+            <div class="col-12 text-center">
+                <h3 class="mb-0 my-3 mb-4">All Semesters</h3>
+            </div>
+                <% if(semester.length == 0) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            <p class="text-danger">Not Found Any One</p>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <% semester.forEach(function(semester) { %>
+                      
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            <a href="/view/semester/<%= semester._id %>" class="btn btn-success"><%= semester.name %></a>
+                        </div>
+                    </div>
+                    <% }) %>
+                <% } %>
+        </div>
+    </div>
+</div>
+<div class="classroom">
+    <div class="sec">
+        <div class="row m-0">
+            <div class="col-12 text-center">
+                <h3 class="mb-0 my-3 mb-4">All ClassRooms</h3>
+            </div>
+                <% if(classroom.length == 0) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            <p class="text-danger">Not Found Any One</p>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <% classroom.forEach(function(classroom) { %>
+                        
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            
+                            <a href="/view/class/<%= classroom._id %>" class="btn btn-success"><%= classroom.name %></a>
+                        </div>
+                    </div>
+                    <% }) %>
+                <% } %>
+        </div>
+    </div>
+</div>
+<div class="courses">
+    <div class="sec">
+        <div class="row m-0">
+            <div class="col-12 text-center">
+                <h2 class="mb-0 my-3 mb-4">All Courses</h2>
+            </div>
+                <% if(course.length == 0) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            <p class="text-danger">Not Found Any One</p>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <% course.forEach(function(course) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            <a href="/view/course/<%= course._id %>" class="btn btn-success"><%= course.name %></a>
+                        </div>
+                    </div>
+                    <% }) %>
+                <% } %>
+        </div>
+    </div>
+</div>  
+<div class="units">  
+    <div class="sec">
+        <div class="row m-0">
+            <div class="col-12 text-center">
+                <h2 class="mb-0 my-3 mb-4">All Units</h2>
+            </div>
+                <% if(unit.length == 0) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            <p class="text-danger">Not Found Any One</p>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <% unit.forEach(function(unit) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            <a href="/view/unit/<%= unit._id %>" class="btn btn-success"><%= unit.name %></a>
+                        </div>
+                    </div>
+                    <% }) %>
+                <% } %>
+        </div>
+    </div>
+</div>
+<div class="topics">
+    <div class="sec">
+        <div class="row m-0">
+            <div class="col-12 text-center">
+                <h2 class="mb-0 my-3 mb-4">All Topics</h2>
+            </div>
+                <% if(topic.length == 0) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            <p class="text-danger">Not Found Any One</p>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <% topic.forEach(function(topic) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            
+                            <a href="/view/topic/<%= topic._id %>" class="btn btn-success"><%= topic.name %></a>
+                        </div>
+                    </div>
+                    <% }) %>
+                <% } %>
+        </div>
+    </div>
+</div>
+<div class="students">
+    <div class="sec">
+        <div class="row m-0">
+            <div class="col-12 text-center">
+                <h2 class="mb-0 my-3 mb-4">All Students</h2>
+            </div>
+                <% if(student.length == 0) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            <p class="text-danger">Not Found Any One</p>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <% student.forEach(function(student) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            <a href="/view/student/<%= student._id %>" class="btn btn-success"><%= student.name %></a>
+                        </div>
+                    </div>
+                    <% }) %>
+                <% } %>
+        </div>
+    </div>
+</div>
+<div class="teachers">
+    <div class="sec">
+        <div class="row m-0">
+            <div class="col-12 text-center">
+                <h2 class="mb-0 my-3 mb-4">All Teachers</h2>
+            </div>
+                <% if(teacher.length == 0) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            <p class="text-danger">Not Found Any One</p>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <% teacher.forEach(function(teacher) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            <a href="/view/teacher/<%= teacher._id %>" class="btn btn-success"> <%= teacher.name %></a>
+                        </div>
+                    </div>
+                    <% }) %>
+                <% } %>
+        </div>
+    </div>
+</div>
+<div class="parents">
+    <div class="sec">
+        <div class="row m-0">
+            <div class="col-12 text-center">
+                <h2 class="mb-0 my-3 mb-4">All Parents</h2>
+            </div>
+                <% if(parent.length == 0) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-1">
+                            <p class="text-danger">Not Found Any One</p>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <% parent.forEach(function(parent) { %>
+                    <div class="col-12 p-1">
+                        <div class="w-100 d-flex justify-content-center alig-items-center p-2">
+                            <a href="/view/parent/<%= parent._id %>" class="btn btn-success"> <%= parent.name %></a>
+                        </div>
+                    </div>
+                    <% }) %>
+                <% } %>
+        </div>
+    </div>
+</div>
+
+

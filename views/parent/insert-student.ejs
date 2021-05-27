@@ -1,0 +1,43 @@
+<%- include("../../patials/header/firstHeader.ejs") %>
+<title>SPT | View Parent</title>
+<%- include("../../patials/header/styleHeader.ejs") %>
+<%- include("../../patials/header/endHeader.ejs") %>
+<%- include("../../patials/header/navHeader.ejs") %>
+<style>
+    .button {
+    color: #FFF;
+        font-weight: 500;
+        background-color: #3958be;
+        border: none;
+        border-radius: 4px;
+        padding: 5px 15px;
+        text-transform: capitalize;
+}
+.input {
+    background-color: rgba(255, 255, 255, 0.39);
+        border-radius: 5px;
+        border: none;
+        padding: 4px;
+        color: #FFF;
+        margin-right: 0.5em;
+}
+</style>
+
+<section id="Form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-7 col-11 mt-5">
+                <div class="formContainer p-4 pb-2">
+                    <form action="/add/student/to/parent/<%= singleParent._id %>" method="POST">
+                        <label for="" class="formLabel">SSN Number</label>
+                        <input type="text" name="ssn" placeholder="" class="formInput">
+                        <div class="d-flex  mt-3 justify-content-end">
+                            <button class="formButton">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include("../../patials/footer/endFooter.ejs") %>

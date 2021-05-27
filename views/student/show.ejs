@@ -1,0 +1,242 @@
+<%- include("../../patials/header/firstHeader.ejs") %>
+<title>SPT | View Student</title>
+<%- include("../../patials/header/styleHeader.ejs") %>
+<%- include("../../patials/header/endHeader.ejs") %>
+<%- include("../../patials/header/navHeader.ejs") %>
+<link href='https://fonts.googleapis.com/css?family=Akaya Kanadaka' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Alata' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<section id="User">
+    <div class="conatiner">
+        <div class="row m-0 justify-content-end">
+            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-7 px-xl-4 px-lg-3 px-md-2 mt-md-1 mt-2">
+                <a href="/user/<%= currentUser._id %>/reset-password">
+                    <div class="user p-1">
+                        <div class="userContainer">
+                            <div class="img">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKUQokFXVpMXRJ_o4V-_9k0oSHE57r1JHhwxw4wX6aUNZbdZfe8sr5v0tbfqmMf_y3KbI&usqp=CAU" class="userImage" alt="">
+                            </div>
+                            <div class="text">
+                                <p class="userName d-inline">Reset Password</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+    <section id="Title">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="row justify-content-center">
+                        <div class="col-md-9 text-center">
+                            <p class="title"><%= singleStudent.name %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 d-flex justify-content-end">
+                <a type="button" href="/view/student/<%= singleStudent._id %>/todo" class="btn btn-primary position-relative" style="background-color: #395060; border-color: #395060;">
+                    TODOS <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" ><%= singleStudent.ToDoListID.length %> <span class="visually-hidden">unread messages</span></span>
+                </a>
+                  <a type="button" href="/view/student/<%= singleStudent._id %>/remedials" class="btn btn-primary position-relative mx-4" style="background-color: #395060; border-color: #395060;">
+                    Remedials <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" ><%= singleStudent.RemedialNotification.length %> <span class="visually-hidden">unread messages</span></span>
+                  </a>
+            </div>
+        </div>
+       
+          
+    </div>
+    <style>
+        .classButtom {
+            cursor: pointer;
+        }
+        .classData {
+            display: none;
+        }
+        .courseButtom {
+            cursor: pointer;
+        }
+        .courseData {
+            display: none;
+        }
+        .unitButtom {
+            cursor: pointer;
+        }
+        .unitData {
+            display: none;
+        }
+       
+        ul {
+            list-style-type: circle;
+            
+            
+        }
+        li {
+            color: #fff;
+            font-weight: bold;
+            padding: 5px;
+        }
+        .t1 {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #fff;
+          }
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+          }
+        tr:nth-child(even) {
+            background-color: #dddddd;
+          }
+          
+    </style>
+    <section id="View">
+        <div class="container">
+            <div class="row m-0">
+                <div class="col-12 mt-2">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-9 ">
+                            <p class="viewLabel " style="font-size: 1.5em; color:#000; margin-bottom: 0.7em">Personal Information</p>
+                            <p style="color: #000; font-size: 1.3em"><i class="material-icons" style="font-size:28px">account_circle</i> Student name: 
+                            <span style="color: #23689b; font-family: 'Alata'">  <%= singleStudent.name %></span>
+                            </br>
+                            <i class="material-icons" style="font-size:28px">picture_in_picture</i> Student SSN:  <span style="color: #23689b; font-family: 'Alata'">  <%= singleStudent.ssn %></span>
+                            </p>
+                            
+                             <hr>
+                             <p class="viewLabel " style="font-size: 1.5em; color: #000; margin-bottom: 0.7em">Grades:
+                             <% if(!singleStudent.ClassID.length == 0 ) { %>
+                                    <% singleStudent.ClassID.forEach(function(Class) { %>
+                                        <br>
+                                        
+                                        
+                                        <ul style="background-color: #395060; border-radius: 20px;" >
+                                            
+                                            <li>
+                                                <span style="font-size: 1em;" class="classButtom"><%= Class.name %> Class</span>
+                                                <ul class="classData">
+                                                    
+                                                    <% Class.CcoursesListID.forEach((course) => { %>
+                                                        <li style=" margin-left: 6em;">
+                                                            <span  style="font-size: 1em" class="courseButtom"><%= course.name %> Course</span>
+                                                            <% course.UnitListID.forEach((unit) => { %>
+                                                                <ul class="courseData">
+                                                                    
+                                                                    <li style=" margin-left: 6em;">
+                                                                        <span  style="font-size: 1em" class="unitButtom"><%= unit.name %> Unit</span>
+                                                                        <% unit.TopicListID.forEach((topic) => { %>
+                                                                            <ul class="unitData">
+                                                                                
+                                                                                <li style=" margin-left: 6em;">
+                                                                                    <span style="font-size: 1em"><%= topic.name %> Topic</span>
+                                                                                    <% 
+                                                                                    var found = false;
+                                                                                    %>
+                                                                                    <% topic.ListOfMarks.forEach((mark) => { %>
+                                                                                        
+                                                                                            <% if(mark.id.equals(singleStudent._id)) { %>
+                                                                                               <% found = true; %>
+                                                                                            <% } %>
+                                                                                       
+                                                                                    <% }) %> 
+                                                                                    
+                                                                                    <% if(found) { %>
+                                                                                        <% topic.ListOfMarks.forEach((mark) => { %>
+                                                                                            <ul>
+                                                                                                
+                                                                                                <% if(mark.id.equals(singleStudent._id)) { %>
+                                                                                                    
+                                                                                                    <li style=" margin-left: 6em; "> 
+                                                                                                        <span style="font-size: 1em">Your Grade: (<%= mark.mark %>/<%= topic.maxGrade %>) </span>
+                                                                                                    </li>
+                                                                                                <% } %>
+                                                                                            </ul>
+                                                                                        <% }) %>  
+                                                                                    <% } else { %>
+                                                                                        <ul>
+                                                                                            
+                                                                                                <li>
+                                                                                                    <span  font-size: 0.9em">Not Added Yet</span>
+                                                                                                </li>
+                                                                                            
+                                                                                        </ul>
+                                                                                    <% } %>
+                                                                                </li>
+                                                                            </ul>
+                                                                        <% }) %>   
+                                                                    </li>
+                                                                </ul>
+                                                            <% }) %>    
+                                                        </li>
+                                                    <% }) %>                                                    
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    <% }); %>
+                                <% } else { %>
+                                    <br>
+                                    <span style="color: #23689b; font-size: 0.7em"><%= singleStudent.name %> Doesn't Register In Any Class Yet. </span>
+                                <% } %> 
+                             </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <div class="row justify-content-center">
+            
+            <div class="col-7 mt-5">
+                <p class="h2">Attendence</p>
+            </div>
+
+            <div class="col-7 mt-3">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Course </th>
+                        <th scope="col">Absence</th>
+                        <th scope="col">Range</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% var counter = 0; %>
+                        <% singleStudent.AttendenceMap.forEach(function(attend) { %>
+                            <tr>
+                                <th scope="row"><%= ++counter %></th>
+                                <td><%= attend.courseName %></td>
+                                <td><%= attend.absence %></td>
+                                <td><input type="range" min="0" max="6" value="<%= attend.absence %>"> <%= attend.absence %>/6</td>
+                              </tr>
+                        <% }) %>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(".classButtom").click(function(){
+            $(".classData").slideToggle();
+        });
+        $(".courseButtom").click(function(){
+            $(".courseData").slideToggle();
+        });
+        $(".unitButtom").click(function(){
+            $(".unitData").slideToggle();
+        });
+    </script>
+<%- include("../../patials/footer/endFooter.ejs") %>

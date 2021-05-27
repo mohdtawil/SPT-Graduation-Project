@@ -84,7 +84,7 @@ app.use(adminRouter);
 
 var port = process.env.PORT || 8123;
 
-// the app view V2
+// the app view in localhost 8123
 app.listen(port , function() {
     console.log("Server is Starting....");
 });
